@@ -6,8 +6,19 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleUser = () => {
-    axios.post("/register", name, email, password);
+  const handleUser = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("/register", {
+        name,
+        email,
+        password,
+      });
+      alert("Registration successful");
+    } catch (e) {
+      alert("Registration Failed");
+    }
   };
   return (
     <div className="mt-4 flex grow items-center justify-around">
@@ -15,7 +26,7 @@ const Register = () => {
         <h1 className="text-4xl text-center">Register </h1>
         <form className="mt-4 max-w-md  mx-auto" onSubmit={handleUser}>
           <input
-            type="email"
+            type="text"
             placeholder="Enter Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
