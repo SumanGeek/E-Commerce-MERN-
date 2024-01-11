@@ -1,31 +1,26 @@
 import express from "express";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import "dotenv/config";
 import cors from "cors";
 import bcryptjs from "bcryptjs";
 import User from "./models/user.model.js";
 const app = express();
-const port = 4000;
+const port = 8000;
 
 app.use(express.json());
 //1RHJ5QAiltxjTvkR
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
 
 const brycptSalt = bcryptjs.genSaltSync(10);
 
-mongoose.connect(process.env.MONGOO_URL || "mongodb://127.0.0.1:27017");
-console.log(process.env.MONGOO_URL);
+// mongoose.connect(process.env.MONGOO_URL || "mongodb://127.0.0.1:27017");
+// console.log(process.env.MONGOO_URL);
 
 app.get("/test", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   try {

@@ -10,7 +10,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/register", {
+      axios.post("/api/register", {
         name,
         email,
         password,
